@@ -1,6 +1,10 @@
 🇬🇧 [English](README.md) | 🇵🇱 [Polski](README.pl.md)
 
-# Claude Code Comprehensive Guide (Polish)
+![Last updated](https://img.shields.io/badge/Last%20updated-April%202026-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Contributions welcome](https://img.shields.io/badge/Contributions-welcome-brightgreen.svg)
+
+# Claude Code Guide in Polish for AI-Assisted Development
 
 The most complete Polish-language guide to **Claude Code** — Anthropic's official CLI for AI-assisted development. From first steps to advanced multi-agent workflows.
 
@@ -45,10 +49,21 @@ claude-code-kompendium/
 3. Check the [cheatsheet](cheatsheet/cheatsheet.md) for quick reference
 4. Browse [examples](examples/) for real-world configurations
 
-## 📬 Stay Connected
+## Contributing
+
+Contributions, corrections, and advanced workflow examples are welcome. Open an issue or PR if you want to improve the guide or add a practical Claude Code pattern.
+
+## Related Repositories
+
+- [agent-orchestration-patterns](https://github.com/DariuszCiesielski/agent-orchestration-patterns) — orchestration patterns for multi-agent AI systems
+- [supabase-wzorce](https://github.com/DariuszCiesielski/supabase-wzorce) — production-ready Supabase patterns in Polish
+- [ai-workflow-automations](https://github.com/DariuszCiesielski/ai-workflow-automations) — practical AI automation workflows and code examples
+
+## Stay Connected
 
 - **Newsletter**: [AI w Biznesie](https://aiwbiznesie.pl)
 - **LinkedIn**: [Dariusz Ciesielski](https://www.linkedin.com/in/dariuszciesielski/)
+- **More repositories**: [DariuszCiesielski on GitHub](https://github.com/DariuszCiesielski)
 
 ## License
 

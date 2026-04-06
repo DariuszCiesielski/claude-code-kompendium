@@ -1,5 +1,9 @@
 🇬🇧 [English](README.md) | 🇵🇱 [Polski](README.pl.md)
 
+![Last updated](https://img.shields.io/badge/Last%20updated-April%202026-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Contributions welcome](https://img.shields.io/badge/Contributions-welcome-brightgreen.svg)
+
 # Kompendium Claude Code
 
 Najobszerniejszy polskojęzyczny przewodnik po **Claude Code** — oficjalnym CLI Anthropic do programowania z AI. Od pierwszych kroków po zaawansowane wzorce multi-agentowe.
@@ -45,10 +49,17 @@ claude-code-kompendium/
 3. Sprawdź [ściągawkę](cheatsheet/cheatsheet.md) do szybkiego wglądu
 4. Przeglądaj [przykłady](examples/) konfiguracji z życia
 
-## 📬 Kontakt
+## Powiązane repozytoria
+
+- [agent-orchestration-patterns](https://github.com/DariuszCiesielski/agent-orchestration-patterns/blob/main/README.pl.md) — wzorce orkiestracji dla systemów AI multi-agent
+- [supabase-wzorce](https://github.com/DariuszCiesielski/supabase-wzorce/blob/main/README.pl.md) — produkcyjne wzorce Supabase po polsku
+- [ai-workflow-automations](https://github.com/DariuszCiesielski/ai-workflow-automations/blob/main/README.pl.md) — praktyczne workflow automatyzacji AI i przykłady kodu
+
+## Bądź w kontakcie
 
 - **Newsletter**: [AI w Biznesie](https://aiwbiznesie.pl)
 - **LinkedIn**: [Dariusz Ciesielski](https://www.linkedin.com/in/dariuszciesielski/)
+- **Więcej repozytoriów**: [DariuszCiesielski na GitHub](https://github.com/DariuszCiesielski)
 
 ## Licencja
 

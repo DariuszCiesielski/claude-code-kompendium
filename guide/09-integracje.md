@@ -1,0 +1,139 @@
+# Rozdział 9: Integracje
+
+## MCP — Model Context Protocol
+
+MCP to otwarty standard pozwalający Claude Code łączyć się z zewnętrznymi narzędziami i źródłami danych. Zamiast kopiować dane ręcznie, Claude ma do nich bezpośredni dostęp.
+
+## Popularne serwery MCP
+
+| Serwer | Co robi | Przykład użycia |
+|--------|---------|-----------------|
+| **Playwright** | Automatyzacja przeglądarki | Testowanie UI, screenshoty |
+| **Supabase** | Zarządzanie bazą danych | Migracje, zapytania SQL |
+| **Jina** | Wyszukiwanie w internecie | Research, czytanie stron |
+| **Context7** | Dokumentacja bibliotek | Aktualne API, migracje |
+| **Stripe** | Zarządzanie płatnościami | Konfiguracja, debugging |
+| **GitHub** | Operacje na repo | PR, issues, code review |
+
+## Konfiguracja MCP
+
+### W pliku `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@anthropic-ai/mcp-playwright"]
+    },
+    "jina": {
+      "command": "npx",
+      "args": ["jina-mcp-server"],
+      "env": {
+        "JINA_API_KEY": "jina_..."
+      }
+    }
+  }
+}
+```
+
+## Playwright MCP — testowanie w przeglądarce
+
+Playwright pozwala Claude Code otwierać strony, klikać przyciski, wypełniać formularze i robić screenshoty:
+
+```
+> Otwórz localhost:3000 i sprawdź czy formularz logowania działa
+> Wypełnij email i hasło, kliknij zaloguj, sprawdź czy przekierowuje na dashboard
+```
+
+Claude automatycznie:
+1. Nawiguje na stronę
+2. Robi snapshot DOM
+3. Wypełnia formularz
+4. Kliknie przycisk
+5. Sprawdza wynik
+6. Raportuje błędy konsoli
+
+## Jina MCP — wyszukiwanie i czytanie stron
+
+```
+> Wyszukaj w internecie najnowsze zmiany w Next.js 16
+> Przeczytaj stronę https://nextjs.org/blog i podsumuj
+```
+
+## Context7 — aktualna dokumentacja
+
+Zamiast polegać na wiedzy treningowej (która może być nieaktualna):
+
+```
+> Sprawdź w dokumentacji jak działa useOptimistic w React 19
+> Jaka jest aktualna składnia middleware w Next.js 16?
+```
+
+## Pluginy Claude Code
+
+### Vercel Plugin
+
+Automatyczne wsparcie dla projektów Vercel:
+
+```
+> Zdeployuj na Vercel
+> Sprawdź status ostatniego deploymentu
+> Pokaż logi produkcyjne
+```
+
+### GSD (Get Stuff Done)
+
+Framework do zarządzania złożonymi projektami:
+
+```
+/gsd:new-project       # Inicjalizuj nowy projekt z kontekstem
+/gsd:plan-phase        # Zaplanuj fazę implementacji
+/gsd:execute-phase     # Wykonaj plan
+/gsd:progress          # Sprawdź postęp
+```
+
+## IDE — integracja z edytorami
+
+### VS Code / Cursor
+
+Claude Code działa niezależnie od IDE, ale możesz:
+- Otworzyć terminal w VS Code i uruchomić `claude`
+- Używać wbudowanego AI w Cursor równolegle z Claude Code
+- Współdzielić `.claude/` konfigurację w zespole
+
+### Neovim
+
+Dedykowane pluginy integrujące Claude Code z Neovim.
+
+## Własne integracje
+
+Możesz budować własne serwery MCP. Struktura:
+
+```typescript
+// Minimalny serwer MCP
+import { McpServer } from '@modelcontextprotocol/sdk/server'
+
+const server = new McpServer({
+  name: 'my-tool',
+  version: '1.0.0'
+})
+
+server.tool('my-action', 'Opis co robi', {
+  param: { type: 'string', description: 'Parametr' }
+}, async ({ param }) => {
+  // logika
+  return { content: [{ type: 'text', text: 'Wynik' }] }
+})
+```
+
+## Wskazówki
+
+1. **Nie instaluj wszystkiego** — dodawaj MCP serwery, których naprawdę potrzebujesz
+2. **Klucze API w zmiennych środowiskowych** — nigdy w konfiguracji
+3. **Playwright do testowania** — automatycznie testuj UI po zmianach
+4. **Context7 zamiast zgadywania** — zawsze sprawdzaj aktualną dokumentację
+
+## Następny rozdział
+
+[← Rozdział 8: Debugowanie](08-debugowanie.md) | [Rozdział 10: Najlepsze praktyki →](10-najlepsze-praktyki.md)

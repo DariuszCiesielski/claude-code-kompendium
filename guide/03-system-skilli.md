@@ -1,0 +1,170 @@
+# Rozdział 3: System skilli
+
+## Czym są skille?
+
+Skille to zestawy instrukcji, które uczą Claude Code powtarzalnych wzorców. Zamiast za każdym razem opisywać jak stworzyć komponent React z Tailwind, tworzysz skill „react-component" i aktywujesz go jednym słowem.
+
+## Rodzaje skilli
+
+### Skille globalne
+
+Dostępne we wszystkich projektach. Przechowywane w `~/.claude/skills/`:
+
+```
+~/.claude/skills/
+├── react-component/
+│   └── SKILL.md
+├── supabase-auth/
+│   └── SKILL.md
+└── api-endpoint/
+    └── SKILL.md
+```
+
+### Skille projektowe
+
+Specyficzne dla jednego projektu. Przechowywane w `.claude/skills/` w katalogu projektu.
+
+### Skille pluginów
+
+Dostarczane przez zainstalowane pluginy Claude Code (np. Vercel, GSD).
+
+## Tworzenie własnego skilla
+
+### Struktura
+
+Każdy skill to folder z plikiem `SKILL.md`:
+
+```
+nazwa-skilla/
+└── SKILL.md
+```
+
+### Zawartość SKILL.md
+
+```markdown
+# Nazwa skilla
+
+## Opis
+Co skill robi i kiedy go używać.
+
+## Triggery
+Frazy aktywujące skill:
+- "dodaj komponent"
+- "utwórz nowy komponent React"
+- "stwórz komponent"
+
+## Instrukcje
+
+### Krok 1: Analiza wymagań
+Przed utworzeniem komponentu zapytaj o:
+- Nazwa komponentu
+- Propsy (jakie dane przyjmuje)
+- Warianty (jakie style/wersje)
+
+### Krok 2: Struktura pliku
+Utwórz plik w `src/components/{NazwaKomponentu}.tsx`:
+
+\```tsx
+import { type FC } from 'react'
+
+interface {NazwaKomponentu}Props {
+  // propsy
+}
+
+export const {NazwaKomponentu}: FC<{NazwaKomponentu}Props> = (props) => {
+  return (
+    <div>
+      {/* implementacja */}
+    </div>
+  )
+}
+\```
+
+### Krok 3: Eksport
+Dodaj eksport do `src/components/index.ts`.
+
+## Zależności
+- react: ^18.0.0
+- typescript: ^5.0.0
+```
+
+## Przykłady skilli z życia
+
+### Skill: API Endpoint (Next.js)
+
+```markdown
+# API Endpoint
+
+## Triggery
+- "dodaj endpoint API"
+- "utwórz route API"
+
+## Instrukcje
+1. Utwórz plik w `src/app/api/{nazwa}/route.ts`
+2. Zawsze dodawaj: walidację inputu, obsługę błędów, typowanie response
+3. Używaj `NextResponse.json()` do odpowiedzi
+4. Loguj błędy ale nie zwracaj stacktrace'ów klientowi
+```
+
+### Skill: Supabase Migration
+
+```markdown
+# Supabase Migration
+
+## Triggery
+- "dodaj migrację"
+- "zmień schemat bazy"
+
+## Instrukcje
+1. Utwórz plik migracji: `supabase/migrations/{timestamp}_{opis}.sql`
+2. Zawsze dodawaj RLS policies dla nowych tabel
+3. Testuj migrację na branchu przed mergem
+4. Nigdy nie modyfikuj istniejących migracji
+```
+
+## Zarządzanie skillami
+
+### Listowanie skilli
+
+```
+> Jakie skille mam zainstalowane?
+
+> Pokaż szczegóły skilla react-component
+```
+
+### Aktywacja skilla
+
+Skille aktywują się automatycznie przez triggery lub możesz je wywołać wprost:
+
+```
+> Użyj skilla react-component — utwórz komponent UserCard
+```
+
+### Aktualizacja skilla
+
+```
+> Zaktualizuj skill api-endpoint — dodaj obsługę CORS
+```
+
+## Kiedy tworzyć skill
+
+Twórz skill gdy:
+- Powtarzasz ten sam wzorzec 3+ razy
+- Wzorzec jest uniwersalny (nie specyficzny dla jednego projektu)
+- Chcesz standaryzować podejście w zespole
+
+Nie twórz skilla gdy:
+- To jednorazowa operacja
+- Wzorzec jest zbyt prosty (lepiej w CLAUDE.md)
+- Istnieje już oficjalny skill o tej funkcji
+
+## Wskazówki
+
+1. **Zacznij od prostych skilli** — 5-10 linii instrukcji
+2. **Testuj skill na nowym projekcie** — czy działa bez dodatkowego kontekstu?
+3. **Dodawaj przykłady kodu** — Claude lepiej rozumie wzorce z konkretnymi snippetami
+4. **Iteruj** — poprawiaj skill po każdym użyciu, gdy widzisz niedociągnięcia
+
+## Następny rozdział
+
+[← Rozdział 2: Podstawowe komendy](02-podstawowe-komendy.md) | [Rozdział 4: Optymalizacja tokenów →](04-optymalizacja-tokenow.md)

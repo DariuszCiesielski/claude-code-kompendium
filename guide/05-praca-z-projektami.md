@@ -1,0 +1,140 @@
+# Rozdział 5: Praca z projektami
+
+## CLAUDE.md — instrukcja dla AI
+
+Plik `CLAUDE.md` to najważniejszy plik w konfiguracji Claude Code. To Twoja instrukcja dla AI — mówi Claude jak pracować z Twoim projektem.
+
+### Globalny CLAUDE.md
+
+Plik `~/.claude/CLAUDE.md` zawiera instrukcje obowiązujące we **wszystkich** projektach:
+
+```markdown
+# Moje globalne zasady
+
+## Język
+Zawsze odpowiadaj po polsku.
+
+## Styl kodu
+- TypeScript strict mode
+- Tailwind CSS do stylowania
+- Komponenty shadcn/ui
+- Nazwy zmiennych po angielsku, komentarze po polsku
+
+## Konwencje
+- Commit messages po polsku
+- Testy obok plików źródłowych (*.test.ts)
+```
+
+### Projektowy CLAUDE.md
+
+Plik `CLAUDE.md` w katalogu projektu zawiera zasady specyficzne:
+
+```markdown
+# Projekt: Moja Aplikacja
+
+## Tech stack
+- Next.js 16 (App Router)
+- Supabase (auth, database, realtime)
+- Tailwind + shadcn/ui
+
+## Struktura
+- `src/app/` — routing (App Router)
+- `src/components/` — komponenty React
+- `src/lib/` — utilities i helpery
+- `src/types/` — typy TypeScript
+
+## Zasady
+- Każdy API route musi sprawdzać auth
+- RLS na każdej tabeli Supabase
+- Polskie znaki (ą,ć,ę...) we wszystkich stringach UI
+
+## Lessons Learned
+- [2026-03-15] Nie używaj `any` w typach Supabase → generuj typy przez CLI
+- [2026-03-20] Middleware Auth: sprawdzaj session w proxy, nie w każdym route
+```
+
+## System pamięci
+
+Claude Code ma wbudowany system pamięci przechowujący informacje między sesjami.
+
+### Pamięć automatyczna
+
+Claude automatycznie zapamiętuje:
+- Preferencje użytkownika (styl, konwencje)
+- Decyzje architektoniczne
+- Rozwiązane problemy
+- Kontekst projektu
+
+### MEMORY.md
+
+Plik `MEMORY.md` w katalogu pamięci projektu przechowuje:
+
+```markdown
+# Pamięć projektu
+
+## Cel
+Aplikacja SaaS do zarządzania projektami dla freelancerów.
+
+## Stan
+Aktywny — faza MVP
+
+## Co zrealizowano
+- Auth z Supabase (email + Google)
+- Dashboard z listą projektów
+- CRUD projektów
+
+## Co zostało
+- System fakturowania
+- Integracja z kalendarzem
+- Landing page
+```
+
+## Handoffy — przekazywanie kontekstu
+
+Gdy sesja się kończy (limit kontekstu, przerwa w pracy), Claude zapisuje handoff:
+
+```
+.ai/handoffs/
+├── 2026-03-20-1400-dark-mode.md
+├── 2026-03-21-0900-auth-fix.md
+└── 2026-03-22-1600-api-refactor.md
+```
+
+Przy kolejnej sesji Claude czyta handoffy i kontynuuje od miejsca, gdzie skończył.
+
+### Ręczne tworzenie handoffu
+
+```
+> Zapisz handoff — kończę na dziś
+```
+
+## Workflow projektowy
+
+### Start nowego projektu
+
+1. Utwórz katalog i zainicjuj git
+2. Uruchom Claude Code
+3. Powiedz: „To nowy projekt — [opis]. Utwórz CLAUDE.md i strukturę."
+4. Claude stworzy konfigurację na podstawie Twojego opisu
+
+### Codzienna praca
+
+1. Uruchom `claude` w katalogu projektu
+2. Claude przeczyta CLAUDE.md, handoffy, pamięć
+3. Pracuj — Claude pamięta kontekst z poprzednich sesji
+4. Na koniec: `> zapisz handoff`
+
+### Praca w zespole
+
+Umieść `CLAUDE.md` w repozytorium (git). Cały zespół korzysta z tych samych instrukcji dla AI.
+
+## Wskazówki
+
+1. **Aktualizuj CLAUDE.md regularnie** — to żywy dokument
+2. **Dodawaj Lessons Learned** — po każdym rozwiązanym problemie
+3. **Używaj handoffów** — nie trać kontekstu między sesjami
+4. **MEMORY.md > powtarzanie** — lepiej zapisać niż mówić za każdym razem
+
+## Następny rozdział
+
+[← Rozdział 4: Optymalizacja tokenów](04-optymalizacja-tokenow.md) | [Rozdział 6: Automatyzacje →](06-automatyzacje.md)

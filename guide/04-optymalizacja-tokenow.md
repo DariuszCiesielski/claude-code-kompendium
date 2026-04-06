@@ -1,0 +1,132 @@
+# Rozdział 4: Optymalizacja tokenów
+
+## Dlaczego tokeny mają znaczenie?
+
+Każda operacja w Claude Code zużywa tokeny. Im więcej tokenów, tym wyższy koszt i wolniejsze odpowiedzi. Dobrze zoptymalizowany workflow może **zaoszczędzić 60-90%** kosztów.
+
+## Czym są tokeny?
+
+Token to jednostka tekstu — średnio ~4 znaki w języku angielskim, ~3 znaki w polskim (polskie słowa są dłuższe). Przykład:
+
+| Tekst | Tokeny |
+|-------|--------|
+| "Hello world" | ~2 tokeny |
+| "Dzień dobry świecie" | ~5 tokenów |
+| Plik 100 linii kodu | ~500-1000 tokenów |
+| Cały kontekst sesji | 50K-200K tokenów |
+
+## RTK — Rust Token Killer
+
+**RTK** to narzędzie proxy, które automatycznie redukuje ilość tokenów w operacjach deweloperskich. Oszczędność: **60-90%** na codziennych operacjach.
+
+### Jak działa?
+
+RTK przechwytuje polecenia CLI (git, npm, ls) i filtruje niepotrzebny output zanim trafi do Claude:
+
+```bash
+# Bez RTK: git status zwraca pełny, rozwlekły output (~500 tokenów)
+# Z RTK: git status zwraca skompresowaną wersję (~80 tokenów)
+```
+
+### Instalacja
+
+```bash
+cargo install rtk
+# lub
+brew install rtk-ai/tap/rtk
+```
+
+### Użycie
+
+RTK działa transparentnie przez hooki Claude Code — wystarczy skonfigurować raz:
+
+```bash
+rtk gain              # Pokaż statystyki oszczędności
+rtk gain --history    # Historia użycia z oszczędnościami
+rtk discover          # Analiza historii — gdzie jeszcze oszczędzić
+```
+
+## Techniki optymalizacji bez narzędzi
+
+### 1. Kompaktowanie kontekstu
+
+Gdy sesja trwa długo, użyj:
+
+```
+/compact
+```
+
+Claude zachowa kluczowe informacje (decyzje, stan projektu) i usunie szczegóły (pełne pliki, logi).
+
+### 2. Precyzyjne polecenia
+
+```
+# Drogo (Claude czyta wiele plików szukając kontekstu):
+> Popraw błędy w projekcie
+
+# Tanio (Claude wie dokładnie gdzie szukać):
+> W pliku src/api/users.ts napraw błąd w linii 42 — brakuje await przed fetchUser()
+```
+
+### 3. Grupowanie operacji
+
+```
+# Drogo (5 osobnych poleceń = 5× kontekst):
+> Dodaj typ UserProfile
+> Dodaj komponent UserCard
+> Dodaj endpoint /api/users
+> Dodaj testy dla UserCard
+> Zaktualizuj routing
+
+# Tanio (1 polecenie z pełnym opisem):
+> Dodaj feature profilu użytkownika:
+> 1. Typ UserProfile w types.ts
+> 2. Komponent UserCard
+> 3. Endpoint GET /api/users/:id
+> 4. Testy dla UserCard
+> 5. Route /profile w routerze
+```
+
+### 4. CLAUDE.md zamiast powtarzania
+
+Zamiast za każdym razem mówić „używaj TypeScript strict, Tailwind, shadcn" — zapisz to w `CLAUDE.md` projektu. Claude przeczyta raz i będzie przestrzegać.
+
+### 5. Skille zamiast długich promptów
+
+Zamiast opisywać procedurę za każdym razem od zera, utwórz skill (patrz [Rozdział 3](03-system-skilli.md)).
+
+### 6. Tryb jednorazowy dla prostych zadań
+
+```bash
+# Nie otwieraj pełnej sesji interaktywnej dla jednego polecenia:
+claude "dodaj .gitignore do projektu"
+```
+
+## Monitorowanie zużycia
+
+### W sesji
+
+```
+/status    # Pokazuje zużycie tokenów w bieżącej sesji
+```
+
+### Statystyki RTK
+
+```bash
+rtk gain              # Łączne oszczędności
+rtk gain --history    # Szczegółowa historia
+```
+
+## Typowe pułapki zużycia tokenów
+
+| Pułapka | Koszt | Rozwiązanie |
+|---------|-------|-------------|
+| Czytanie dużych plików w pętli | Bardzo wysoki | Wskaż konkretne linie/funkcje |
+| Debugowanie metodą prób i błędów | Wysoki | Opisz symptomy, nie zgaduj |
+| Zbyt ogólne polecenia | Średni | Bądź precyzyjny |
+| Długie sesje bez /compact | Średni | Kompaktuj co ~30 min |
+| Powtarzanie instrukcji z CLAUDE.md | Niski | Zaufaj, że Claude przeczytał |
+
+## Następny rozdział
+
+[← Rozdział 3: System skilli](03-system-skilli.md) | [Rozdział 5: Praca z projektami →](05-praca-z-projektami.md)

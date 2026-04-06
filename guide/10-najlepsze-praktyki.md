@@ -1,0 +1,196 @@
+# Rozdział 10: Najlepsze praktyki
+
+## Kompilacja sprawdzonych wzorców pracy z Claude Code — od organizacji projektu po codzienne nawyki.
+
+---
+
+## 1. Organizacja projektu
+
+### Zawsze utrzymuj CLAUDE.md
+
+To Twój najważniejszy plik. Aktualizuj go regularnie:
+
+```markdown
+# CLAUDE.md — minimum
+
+## Tech stack
+[Co, w jakiej wersji, dlaczego]
+
+## Konwencje
+[Nazewnictwo, struktura, styl]
+
+## Zasady bezpieczeństwa
+[Auth, RLS, env vars]
+
+## Lessons Learned
+[Błędy i ich rozwiązania — żywy dokument]
+```
+
+### Utrzymuj MEMORY.md
+
+Na końcu każdej sesji upewnij się, że MEMORY.md zawiera:
+- Cel projektu (1-2 zdania)
+- Aktualny stan (co zrobione, co zostało)
+- Blokery i otwarte pytania
+- Decyzje architektoniczne
+
+### Handoffy zamiast utraconego kontekstu
+
+Przed zakończeniem sesji: `> zapisz handoff`. Rano: Claude przeczyta handoff i kontynuuje.
+
+---
+
+## 2. Efektywna komunikacja z AI
+
+### Bądź konkretny
+
+```
+# Źle:
+> Popraw ten kod
+
+# Dobrze:
+> Funkcja fetchUsers w src/api/users.ts nie obsługuje paginacji.
+> Dodaj parametry page i limit, zwracaj total count w response.
+```
+
+### Podawaj kontekst biznesowy
+
+```
+> Ten formularz jest dla właścicieli małych firm, którzy nie są techniczni.
+> Walidacja musi mieć jasne komunikaty po polsku, bez żargonu.
+```
+
+### Iteruj zamiast opisywać wszystko naraz
+
+```
+> Utwórz tabelę użytkowników
+[gotowe]
+> Dodaj sortowanie po kolumnach
+[gotowe]
+> Dodaj filtrowanie po statusie
+[gotowe]
+```
+
+---
+
+## 3. Bezpieczeństwo
+
+### Chronione pliki
+
+Nigdy nie pozwalaj AI automatycznie edytować:
+- `.env` i `.env.*`
+- Pliki migracji bazy danych
+- Lock files (package-lock.json, pnpm-lock.yaml)
+- Pliki z kluczami API
+
+### Przed commitem
+
+- Sprawdź czy nie wyciekają sekrety (`sk_`, `API_KEY`, `SECRET`)
+- Upewnij się, że `.gitignore` zawiera `.env*`
+- Przejrzyj diff — nie commituj ślepo
+
+### Obsługa błędów
+
+- Error messages nie mogą wyciekać wewnętrznych szczegółów
+- Loguj pełne błędy na serwerze, klientowi zwracaj ogólny komunikat
+- Zawsze sprawdzaj edge cases: null, pusty array, timeout
+
+---
+
+## 4. Optymalizacja kosztów
+
+### RTK (Rust Token Killer)
+
+Zainstaluj RTK — 60-90% oszczędności na operacjach CLI.
+
+### Grupuj operacje
+
+Zamiast 5 osobnych poleceń — jedno ze wszystkimi krokami.
+
+### /compact regularnie
+
+Co ~30 minut lub po zakończeniu logicznego bloku pracy.
+
+### Skille zamiast powtarzania
+
+Twórz skille dla powtarzalnych wzorców. Oszczędzasz tokeny I czas.
+
+---
+
+## 5. Jakość kodu
+
+### Self-review przed zakończeniem
+
+Checklist:
+- [ ] Kod kompiluje się bez błędów
+- [ ] Brak nieużywanych importów
+- [ ] Obsługa błędów jest kompletna
+- [ ] Typy są precyzyjne (nie `any`)
+- [ ] Brak console.log/debuggerów
+- [ ] Nazewnictwo spójne z projektem
+
+### Testowanie w przeglądarce
+
+Po zmianach w UI — automatycznie testuj z Playwright:
+- Renderowanie komponentów
+- Formularze (walidacja, submit)
+- Nawigacja i routing
+- Błędy konsoli
+- Responsywność (375px, 768px, 1024px)
+
+---
+
+## 6. Praca zespołowa
+
+### Współdziel CLAUDE.md w repozytorium
+
+Cały zespół korzysta z tych samych instrukcji. Zmiana konwencji = PR do CLAUDE.md.
+
+### Dokumentuj decyzje
+
+```markdown
+## Lessons Learned
+- [2026-03-15] PROBLEM: fetchUser zwracał cached data → ROZWIĄZANIE: dodano revalidate
+- [2026-03-20] PROBLEM: middleware auth blokował public routes → ROZWIĄZANIE: whitelist w proxy.ts
+```
+
+### Code review z AI
+
+```
+> Zrób code review zmian w ostatnim commicie.
+> Skup się na: bezpieczeństwo, wydajność, typowanie.
+```
+
+---
+
+## 7. Codzienne nawyki
+
+| Kiedy | Co zrobić |
+|-------|----------|
+| **Start sesji** | Claude czyta handoffy i MEMORY.md |
+| **W trakcie pracy** | /compact co 30 min, jasne polecenia |
+| **Po zakończeniu bloku** | Testy, linter, type-check |
+| **Koniec sesji** | Handoff, aktualizacja MEMORY.md |
+| **Raz w tygodniu** | Aktualizuj CLAUDE.md, przejrzyj Lessons Learned |
+
+---
+
+## Podsumowanie kompendium
+
+1. **CLAUDE.md** to fundament — utrzymuj go aktualnie
+2. **Bądź konkretny** — Claude jest tak dobry jak Twoje polecenia
+3. **Optymalizuj tokeny** — RTK + grupowanie + skille
+4. **Automatyzuj** — hooki, cron, CI/CD
+5. **Testuj** — Playwright, type-check, linter po każdej zmianie
+6. **Dokumentuj** — handoffy, Lessons Learned, MEMORY.md
+7. **Iteruj** — zacznij prosto, rozbudowuj w miarę potrzeb
+
+---
+
+## Kontakt i dalsze zasoby
+
+- **Newsletter**: [AI w Biznesie](https://aiwbiznesie.pl)
+- **LinkedIn**: [Dariusz Ciesielski](https://www.linkedin.com/in/dariuszciesielski/)
+- **Dokumentacja Anthropic**: [docs.anthropic.com](https://docs.anthropic.com)
+
+[← Rozdział 9: Integracje](09-integracje.md) | [Ściągawka →](../cheatsheet/cheatsheet.md)

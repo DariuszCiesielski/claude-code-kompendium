@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreCommit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx tsc --noEmit 2>&1 | head -20",
+            "description": "Sprawdzenie typów TypeScript przed commitem"
+          },
+          {
+            "type": "command",
+            "command": "npx eslint --quiet --max-warnings 0 $(git diff --cached --name-only --diff-filter=ACM | grep -E '\\.(ts|tsx|js|jsx)$' | tr '\\n' ' ')",
+            "description": "Lint tylko zmienionych plików (staged)"
+          },
+          {
+            "type": "command",
+            "command": "git diff --cached --name-only | grep -qE '\\.(env|key|pem|secret)' && echo 'UWAGA: Wykryto plik z potencjalnymi sekretami w staged files!' && exit 1 || true",
+            "description": "Blokada commitowania plików z sekretami"
+          }
+        ]
+      }
+    ]
+  }
+}

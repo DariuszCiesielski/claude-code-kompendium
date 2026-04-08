@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "changed_file=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; test_file=$(echo \"$changed_file\" | sed 's/\\.\\(ts\\|tsx\\)$/.test.\\1/' | sed 's|/src/|/src/__tests__/|'); if [ -f \"$test_file\" ]; then npx vitest run \"$test_file\" --reporter=verbose 2>&1 | tail -20; else echo \"Brak pliku testowego: $test_file\"; fi",
+            "description": "Uruchom testy powiązane z edytowanym plikiem"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE 'npm (install|add|remove)'; then echo '📦 Zmiana zależności — rozważ uruchomienie pełnego zestawu testów: npm test'; fi",
+            "description": "Przypomnienie o testach po zmianie zależności"
+          }
+        ]
+      }
+    ]
+  }
+}

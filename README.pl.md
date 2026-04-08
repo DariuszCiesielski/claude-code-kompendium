@@ -22,13 +22,16 @@ Najobszerniejszy polskojęzyczny przewodnik po **Claude Code** — oficjalnym CL
 | 8 | [Debugowanie](guide/08-debugowanie.md) | Systematyczne strategie debugowania |
 | 9 | [Integracje](guide/09-integracje.md) | Serwery MCP, rozszerzenia IDE, narzędzia zewnętrzne |
 | 10 | [Najlepsze praktyki](guide/10-najlepsze-praktyki.md) | Kompilacja sprawdzonych wzorców |
+| 11 | [Frameworki multi-agent](guide/11-multi-agent-frameworks.md) | Porównanie open-multi-agent, claude-swarm, session-driver |
+| 12 | [Wzorce promptów agentowych](guide/12-prompt-patterns.md) | Prefix caching, hierarchia pamięci, modularność, bezpieczeństwo |
 
 ## 📁 Struktura repozytorium
 
 ```
 claude-code-kompendium/
-├── guide/              # 10 rozdziałów (po polsku)
+├── guide/              # 12 rozdziałów (po polsku)
 ├── examples/           # Przykładowe pliki CLAUDE.md i szablony skilli
+│   └── skills/         # Gotowe skille (project-setup, token-optimizer, security-audit)
 ├── cheatsheet/         # Ściągawka
 ├── CONTRIBUTING.md     # Jak współtworzyć
 ├── LICENSE             # MIT

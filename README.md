@@ -22,13 +22,16 @@ The most complete Polish-language guide to **Claude Code** — Anthropic's offic
 | 8 | [Debugging](guide/08-debugowanie.md) | Systematic debugging strategies |
 | 9 | [Integrations](guide/09-integracje.md) | MCP servers, IDE extensions, external tools |
 | 10 | [Best Practices](guide/10-najlepsze-praktyki.md) | Compilation of tips and patterns |
+| 11 | [Multi-Agent Frameworks](guide/11-multi-agent-frameworks.md) | Comparison of open-multi-agent, claude-swarm, session-driver |
+| 12 | [Agentic Prompt Patterns](guide/12-prompt-patterns.md) | Prefix caching, memory hierarchy, modular prompts, security |
 
 ## 📁 Repository Structure
 
 ```
 claude-code-kompendium/
-├── guide/              # 10 guide chapters (in Polish)
+├── guide/              # 12 guide chapters (in Polish)
 ├── examples/           # Example CLAUDE.md files and skill templates
+│   └── skills/         # Ready-to-use skills (project-setup, token-optimizer, security-audit)
 ├── cheatsheet/         # Quick-reference cheatsheet
 ├── CONTRIBUTING.md     # How to contribute
 ├── LICENSE             # MIT

@@ -1,0 +1,97 @@
+# Rozdział 11: Frameworki multi-agent — porównanie
+
+## Problem: Gdy subagenci nie wystarczą
+
+Wbudowane subagenci Claude Code świetnie działają na proste, niezależne zadania (Rozdział 7). Ale co gdy potrzebujesz:
+
+- **Zależności między zadaniami** — agent B czeka na wynik agenta A
+- **Wielu modeli AI** — Claude do planowania, GPT do kodowania, Ollama do prostych zadań
+- **Human-in-the-loop** — zatwierdzanie kluczowych decyzji w trakcie pipeline
+- **Odporności na błędy** — agent się zawiesił, reszta działa dalej
+
+Wtedy potrzebujesz frameworka multi-agent.
+
+## Porównanie frameworków (stan: kwiecień 2026)
+
+| Framework | Stars | Język | Modele | DAG | Human-in-loop | Waga |
+|-----------|-------|-------|--------|-----|---------------|------|
+| **open-multi-agent** | 4.2k | TS | Claude+GPT+Gemini+Ollama | ✅ auto | ✅ onApproval | Lekki (3 deps) |
+| **claude-swarm** | 93 | Python | Claude | ✅ manual | ✅ quality gate | Średni |
+| **claude-session-driver** | 72 | Shell | Claude | ❌ | ❌ | Ultralekki |
+| **VoltAgent** | 7.2k | TS | Multi | ✅ | ✅ | Ciężki (pełna platforma) |
+| CC subagenci (natywne) | — | — | Claude | ❌ | ❌ | Zero deps |
+
+## open-multi-agent — Rekomendacja
+
+Najlepszy stosunek możliwości do złożoności. Jedno wywołanie `runTeam()`:
+
+```typescript
+import { runTeam } from 'open-multi-agent';
+
+const result = await runTeam({
+  goal: "Dodaj system autoryzacji z rolami admin/user",
+  agents: [
+    { role: "architect", model: "claude-opus-4-6" },
+    { role: "coder", model: "claude-sonnet-4-6" },
+    { role: "reviewer", model: "claude-opus-4-6" },
+  ],
+  onApproval: async (plan) => {
+    // Human zatwierdza plan przed kodowaniem
+    console.log("Plan:", plan);
+    return true; // lub false → agent przerabia
+  },
+});
+```
+
+### Co robi pod spodem:
+1. **Dekompozycja** — cel → DAG zadań (automatycznie)
+2. **Równoległe wykonanie** — niezależne zadania lecą jednocześnie
+3. **SharedMemory** — agenci dzielą kontekst przez wspólną pamięć
+4. **Quality gate** — reviewer ocenia wynik przed merge
+
+### Kiedy używać zamiast subagentów?
+
+| Scenariusz | Subagenci CC | open-multi-agent |
+|-----------|-------------|-----------------|
+| 3 niezależne testy | ✅ | ❌ overkill |
+| Feature: plan → kod → review | ❌ brak zależności | ✅ DAG |
+| Mieszane modele (oszczędność) | ❌ tylko Claude | ✅ multi-model |
+| Zadanie <5 min | ✅ | ❌ narzut |
+| Pipeline 30+ min | ❌ zawiesza się | ✅ odporny |
+
+## claude-session-driver — Alternatywa Shell
+
+Jeśli nie chcesz dodawać zależności TS:
+
+```bash
+# Uruchom 3 sesje CC w tmux
+claude-session-driver start --sessions 3 \
+  --task-file tasks.jsonl \
+  --hooks output.jsonl
+```
+
+Prostsze niż framework, ale bez DAG i multi-model. Dobre do fire-and-forget.
+
+## Wzorzec: Decision Log
+
+Problem: Claude Code kompaktuje kontekst i **zapomina** decyzje z początku sesji.
+
+Rozwiązanie: `cc-plugin-decision-log` — każda ważna decyzja zapisywana w pliku, który przeżywa kompaktowanie:
+
+```
+[2026-04-08 14:30] DECISION: Wybraliśmy HMAC zamiast JWT dla gateway'ów
+  REASON: Prostsze, stateless, nie wymaga rotacji kluczy
+  CONTEXT: Ekosystem 12 projektów, każdy z własnym gateway
+  ALTERNATIVES: JWT (odrzucone — wymaga refresh token flow)
+```
+
+Lepsze niż handoffy — bardziej strukturalne, łatwiej przeszukiwalne.
+
+**Repo:** https://github.com/obra/cc-plugin-decision-log
+
+## Linki
+
+- [open-multi-agent](https://github.com/JackChen-me/open-multi-agent) — rekomendowany framework
+- [claude-swarm](https://github.com/affaan-m/claude-swarm) — dependency graph + quality gate
+- [claude-session-driver](https://github.com/obra/claude-session-driver) — tmux orkiestracja
+- [cc-plugin-decision-log](https://github.com/obra/cc-plugin-decision-log) — decision log

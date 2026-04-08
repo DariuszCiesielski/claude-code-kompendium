@@ -1,0 +1,112 @@
+# Rozdział 12: Wzorce promptów agentowych
+
+## Źródło
+
+Na podstawie badań repo [agentic-ai-prompt-research](https://github.com/Leonxlnx/agentic-ai-prompt-research) (2k+ stars, 30 udokumentowanych wzorców).
+
+## Pattern 1: Cacheable Prefix vs Dynamic Suffix
+
+### Problem
+System prompt (CLAUDE.md + skille) jest duży (5-20k tokenów) i powtarza się w każdym wywołaniu crona, skanu czy pipeline. To marnowanie tokenów.
+
+### Rozwiązanie
+Podziel prompt na dwie części:
+
+```
+┌─────────────────────────────────────┐
+│ STAŁA CZĘŚĆ (cacheable prefix)      │ ← Ta sama w każdym wywołaniu
+│ - Kim jesteś                        │    Anthropic cache'uje automatycznie
+│ - Zasady projektu                   │
+│ - Konwencje kodu                    │
+│ - Narzędzia                         │
+├─────────────────────────────────────┤
+│ DYNAMICZNA CZĘŚĆ (suffix)           │ ← Zmienia się per request
+│ - Konkretne zadanie                 │
+│ - Kontekst sesji                    │
+│ - Dane wejściowe                    │
+└─────────────────────────────────────┘
+```
+
+### Oszczędność
+- Prefix ~10k tokenów × 100 wywołań/dzień = 1M tokenów
+- Z cache: ~10k × 1 (pierwsze) + 100 × suffix = **90% taniej**
+
+### Jak zastosować w CLAUDE.md
+
+```markdown
+# CLAUDE.md — STAŁA CZĘŚĆ (nie zmieniaj co sesję)
+## O projekcie [...]
+## Konwencje [...]
+## Stack [...]
+
+# --- GRANICA CACHE ---
+
+# Bieżąca sesja (dynamiczne)
+## Aktywne zadanie: [...]
+## Kontekst: [...]
+```
+
+## Pattern 2: Hierarchia pamięci (3 warstwy)
+
+```
+Working Memory     → Bieżąca sesja (kontekst okna)
+    ↓ kompaktowanie
+Episodic Memory    → Handoffy (.ai/handoffs/)
+    ↓ konsolidacja
+Semantic Memory    → MEMORY.md (trwała wiedza)
+```
+
+### Zastosowanie
+
+| Warstwa | Co przechowywać | Czas życia |
+|---------|-----------------|------------|
+| Working | Aktualny kod, diff, errory | Sesja |
+| Episodic | Decyzje, blockers, postęp | Dni |
+| Semantic | Architektura, konwencje, preferencje | Miesiące |
+
+**Klucz:** Nie zapisuj wszystkiego do MEMORY.md. Handoffy to warstwa pośrednia — decyzje „awansują" do MEMORY.md dopiero gdy są trwale ważne.
+
+## Pattern 3: Modularny system prompt
+
+Zamiast jednego monolitycznego CLAUDE.md, rozbij na moduły:
+
+```
+.claude/
+├── CLAUDE.md           ← Core (zawsze ładowany)
+├── rules/
+│   ├── typescript.md   ← Ładowany gdy edytujesz .ts
+│   ├── supabase.md     ← Ładowany gdy edytujesz migracje
+│   └── testing.md      ← Ładowany gdy piszesz testy
+```
+
+Claude Code obsługuje to natywnie przez [path-scoped rules](https://docs.anthropic.com/en/docs/claude-code/memory#project-specific-instructions).
+
+### Zalety
+- Mniejszy kontekst per-task (ładowane tylko relevantne reguły)
+- Łatwiejsze utrzymanie (edytujesz 1 plik, nie cały CLAUDE.md)
+- Mniej konfliktów w zespole
+
+## Pattern 4: Security boundaries w promptach
+
+Z badań [agentshield](https://github.com/affaan-m/agentshield):
+
+```markdown
+## Sekcja: Granice bezpieczeństwa
+
+### NIGDY nie rób (hardcoded):
+- Nie wyświetlaj kluczy API/tokenów w output
+- Nie commituj plików .env
+- Nie używaj service_role po stronie klienta
+
+### Weryfikuj przed akcją:
+- Czy plik zawiera sekrety? → grep sk_, SERVICE_ROLE, API_KEY
+- Czy .gitignore zawiera .env*? → sprawdź przed commitem
+```
+
+**Dlaczego to działa:** LLM traktuje instrukcje „NIGDY" poważniej niż „unikaj". Konkretne wzorce (sk_, SERVICE_ROLE) są łatwiejsze do wykrycia niż abstrakcyjne reguły.
+
+## Linki
+
+- [agentic-ai-prompt-research](https://github.com/Leonxlnx/agentic-ai-prompt-research) — 30 wzorców
+- [agentshield](https://github.com/affaan-m/agentshield) — security scanner dla agentów
+- [double-shot-latte](https://github.com/obra/double-shot-latte) — auto-kontynuacja (prefix pattern)

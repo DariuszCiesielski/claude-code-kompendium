@@ -155,6 +155,3 @@ Umieść `CLAUDE.md` w repozytorium (git). Cały zespół korzysta z tych samych
 3. **Używaj handoffów** — nie trać kontekstu między sesjami
 4. **MEMORY.md > powtarzanie** — lepiej zapisać niż mówić za każdym razem
 
-## Następny rozdział
-
-[← Rozdział 4: Optymalizacja tokenów](04-optymalizacja-tokenow.qmd) | [Rozdział 6: Automatyzacje →](06-automatyzacje.qmd)

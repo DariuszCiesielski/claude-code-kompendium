@@ -154,6 +154,3 @@ Claude doda odpowiedni null check lub typ opcjonalny.
 - [ ] Czy baza danych jest dostępna?
 - [ ] Czy błąd jest powtarzalny?
 
-## Następny rozdział
-
-[← Rozdział 7: Multi-agent](07-multi-agent.qmd) | [Rozdział 9: Integracje →](09-integracje.qmd)

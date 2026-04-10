@@ -178,6 +178,3 @@ Nie twórz skilla gdy:
 3. **Dodawaj przykłady kodu** — Claude lepiej rozumie wzorce z konkretnymi snippetami
 4. **Iteruj** — poprawiaj skill po każdym użyciu, gdy widzisz niedociągnięcia
 
-## Następny rozdział
-
-[← Rozdział 2: Podstawowe komendy](02-podstawowe-komendy.qmd) | [Rozdział 4: Optymalizacja tokenów →](04-optymalizacja-tokenow.qmd)

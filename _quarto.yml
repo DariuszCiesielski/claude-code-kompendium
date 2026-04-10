@@ -38,9 +38,14 @@ format:
   typst:
     extend: orange-book
     toc-depth: 2
+    font-size: 11pt
+    supplement-chapter: "Rozdział"
+    supplement-part: "Część"
+    outline-font-size: 1.1em
+    part-style: 2
     mainfont: "Source Serif 4"
     monofont: "JetBrains Mono NL"
     include-in-header:
       - text: |
           #set text(lang: "pl")
-          #show raw.where(block: true): set text(size: 0.85em)
+          #show raw.where(block: true): set text(size: 0.9em)

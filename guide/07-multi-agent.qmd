@@ -139,6 +139,3 @@ Subagenci mają overhead — każdy startuje z czystym kontekstem. Dla prostych 
 3. **Sprawdzaj wyniki subagentów** — agent-orkiestrator powinien walidować
 4. **Unikaj współdzielonego stanu** — agenci nie powinni edytować tych samych plików
 
-## Następny rozdział
-
-[← Rozdział 6: Automatyzacje](06-automatyzacje.qmd) | [Rozdział 8: Debugowanie →](08-debugowanie.qmd)

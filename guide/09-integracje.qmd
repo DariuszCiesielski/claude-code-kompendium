@@ -156,6 +156,3 @@ Zacznij od 2-3 serwerów MCP, które naprawdę potrzebujesz. Każdy dodatkowy se
 3. **Playwright do testowania** — automatycznie testuj UI po zmianach
 4. **Context7 zamiast zgadywania** — zawsze sprawdzaj aktualną dokumentację
 
-## Następny rozdział
-
-[← Rozdział 8: Debugowanie](08-debugowanie.qmd) | [Rozdział 10: Najlepsze praktyki →](10-najlepsze-praktyki.qmd)

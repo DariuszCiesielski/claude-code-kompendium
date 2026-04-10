@@ -147,6 +147,3 @@ Opisuj problem, nie rozwiązanie. Claude Code sam dobierze najlepsze narzędzia 
 Zacznij od prostego polecenia, oceń wynik, doprecyzuj. Iteracja jest tańsza niż próba opisania idealnego wyniku za jednym razem.
 :::
 
-## Następny rozdział
-
-[← Rozdział 1: Wprowadzenie](01-wprowadzenie.qmd) | [Rozdział 3: System skilli →](03-system-skilli.qmd)

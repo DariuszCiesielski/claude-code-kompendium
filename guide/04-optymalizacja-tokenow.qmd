@@ -149,6 +149,3 @@ Poniższa tabela pokazuje typowe sytuacje, w których tokeny są marnowane. Zwr�
 | Długie sesje bez /compact | Średni | Kompaktuj co ~30 min |
 | Powtarzanie instrukcji z CLAUDE.md | Niski | Zaufaj, że Claude przeczytał |
 
-## Następny rozdział
-
-[← Rozdział 3: System skilli](03-system-skilli.qmd) | [Rozdział 5: Praca z projektami →](05-praca-z-projektami.qmd)

@@ -169,6 +169,3 @@ RTK rejestruje się jako hook przy instalacji i działa transparentnie. Każde p
 3. **Loguj działanie hooków** — ułatwia debugowanie
 4. **Unikaj pętli** — hook wywołujący narzędzie, które wywołuje hook...
 
-## Następny rozdział
-
-[← Rozdział 5: Praca z projektami](05-praca-z-projektami.qmd) | [Rozdział 7: Multi-agent →](07-multi-agent.qmd)

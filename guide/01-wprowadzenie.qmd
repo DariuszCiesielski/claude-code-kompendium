@@ -119,6 +119,3 @@ Po pierwszym uruchomieniu Claude Code tworzy:
 3. **Iteruj** — zacznij od prostego polecenia, doprecyzuj w kolejnych krokach
 4. **Czytaj co Claude robi** — ucz się z jego podejścia do problemów
 
-## Następny rozdział
-
-[Rozdział 2: Podstawowe komendy →](02-podstawowe-komendy.qmd)

@@ -4,3 +4,6 @@ dist/
 .DS_Store
 _output/
 .quarto/
+
+/.quarto/
+**/*.quarto_ipynb

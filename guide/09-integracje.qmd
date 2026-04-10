@@ -136,4 +136,4 @@ server.tool('my-action', 'Opis co robi', {
 
 ## Następny rozdział
 
-[← Rozdział 8: Debugowanie](08-debugowanie.md) | [Rozdział 10: Najlepsze praktyki →](10-najlepsze-praktyki.md)
+[← Rozdział 8: Debugowanie](08-debugowanie.qmd) | [Rozdział 10: Najlepsze praktyki →](10-najlepsze-praktyki.qmd)

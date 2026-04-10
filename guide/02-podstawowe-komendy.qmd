@@ -139,4 +139,4 @@ Claude Code może uruchamiać polecenia w terminalu:
 
 ## Następny rozdział
 
-[← Rozdział 1: Wprowadzenie](01-wprowadzenie.md) | [Rozdział 3: System skilli →](03-system-skilli.md)
+[← Rozdział 1: Wprowadzenie](01-wprowadzenie.qmd) | [Rozdział 3: System skilli →](03-system-skilli.qmd)

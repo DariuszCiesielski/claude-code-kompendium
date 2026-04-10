@@ -40,6 +40,11 @@ claude
 
 Claude Code przeanalizuje strukturę projektu i będzie gotowy do pracy.
 
+::: {.callout-tip}
+## Pierwszy krok po instalacji
+Po zainstalowaniu Claude Code, wejdź do katalogu dowolnego projektu i uruchom `claude`. Narzędzie automatycznie przeanalizuje strukturę projektu i będzie gotowe do pracy. Nie musisz konfigurować niczego na start — Claude Code sam wykryje technologie, framework i konwencje.
+:::
+
 ## Pierwszy kontakt
 
 Po uruchomieniu zobaczysz interaktywny prompt. Możesz po prostu pisać po polsku:
@@ -116,4 +121,4 @@ Po pierwszym uruchomieniu Claude Code tworzy:
 
 ## Następny rozdział
 
-[Rozdział 2: Podstawowe komendy →](02-podstawowe-komendy.md)
+[Rozdział 2: Podstawowe komendy →](02-podstawowe-komendy.qmd)

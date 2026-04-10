@@ -133,4 +133,4 @@ Claude doda odpowiedni null check lub typ opcjonalny.
 
 ## Następny rozdział
 
-[← Rozdział 7: Multi-agent](07-multi-agent.md) | [Rozdział 9: Integracje →](09-integracje.md)
+[← Rozdział 7: Multi-agent](07-multi-agent.qmd) | [Rozdział 9: Integracje →](09-integracje.qmd)

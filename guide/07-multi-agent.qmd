@@ -118,4 +118,4 @@ Użyj gdy: zadania są długie i mogą wymagać korekt w trakcie.
 
 ## Następny rozdział
 
-[← Rozdział 6: Automatyzacje](06-automatyzacje.md) | [Rozdział 8: Debugowanie →](08-debugowanie.md)
+[← Rozdział 6: Automatyzacje](06-automatyzacje.qmd) | [Rozdział 8: Debugowanie →](08-debugowanie.qmd)

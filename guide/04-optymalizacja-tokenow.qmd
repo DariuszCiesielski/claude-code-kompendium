@@ -93,7 +93,7 @@ Zamiast za każdym razem mówić „używaj TypeScript strict, Tailwind, shadcn"
 
 ### 5. Skille zamiast długich promptów
 
-Zamiast opisywać procedurę za każdym razem od zera, utwórz skill (patrz [Rozdział 3](03-system-skilli.md)).
+Zamiast opisywać procedurę za każdym razem od zera, utwórz skill (patrz [Rozdział 3](03-system-skilli.qmd)).
 
 ### 6. Tryb jednorazowy dla prostych zadań
 
@@ -129,4 +129,4 @@ rtk gain --history    # Szczegółowa historia
 
 ## Następny rozdział
 
-[← Rozdział 3: System skilli](03-system-skilli.md) | [Rozdział 5: Praca z projektami →](05-praca-z-projektami.md)
+[← Rozdział 3: System skilli](03-system-skilli.qmd) | [Rozdział 5: Praca z projektami →](05-praca-z-projektami.qmd)

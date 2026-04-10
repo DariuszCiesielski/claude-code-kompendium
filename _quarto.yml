@@ -10,14 +10,14 @@ book:
   language: pl
   reader-mode: true
   chapters:
-    - index.md
+    - index.qmd
     - part: "Podstawy"
       chapters:
-        - guide/01-wprowadzenie.md
-        - guide/03-system-skilli.md
+        - guide/01-wprowadzenie.qmd
+        - guide/03-system-skilli.qmd
     - part: "Integracje i wzorce"
       chapters:
-        - guide/09-integracje.md
+        - guide/09-integracje.qmd
 
 format:
   typst:

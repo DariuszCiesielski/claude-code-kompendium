@@ -6,6 +6,19 @@ Skille to zestawy instrukcji, które uczą Claude Code powtarzalnych wzorców. Z
 
 ## Rodzaje skilli
 
+```{mermaid}
+flowchart TD
+    A[Skille] --> B[Globalne]
+    A --> C[Projektowe]
+    A --> D[Pluginów]
+    B --> B1["~/.claude/skills/"]
+    C --> C1[".claude/skills/"]
+    D --> D1["Zainstalowane pluginy"]
+    B1 --> E["Dostępne wszędzie"]
+    C1 --> F["Tylko w tym projekcie"]
+    D1 --> G["Vercel, GSD, itp."]
+```
+
 ### Skille globalne
 
 Dostępne we wszystkich projektach. Przechowywane w `~/.claude/skills/`:
@@ -155,7 +168,7 @@ Twórz skill gdy:
 
 Nie twórz skilla gdy:
 - To jednorazowa operacja
-- Wzorzec jest zbyt prosty (lepiej w CLAUDE.md)
+- Wzorzec jest zbyt prosty (lepiej w CLAUDE.qmd)
 - Istnieje już oficjalny skill o tej funkcji
 
 ## Wskazówki
@@ -167,4 +180,4 @@ Nie twórz skilla gdy:
 
 ## Następny rozdział
 
-[← Rozdział 2: Podstawowe komendy](02-podstawowe-komendy.md) | [Rozdział 4: Optymalizacja tokenów →](04-optymalizacja-tokenow.md)
+[← Rozdział 2: Podstawowe komendy](02-podstawowe-komendy.qmd) | [Rozdział 4: Optymalizacja tokenów →](04-optymalizacja-tokenow.qmd)

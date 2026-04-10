@@ -83,7 +83,7 @@ Claude Code obsługuje to natywnie przez [path-scoped rules](https://docs.anthro
 
 ### Zalety
 - Mniejszy kontekst per-task (ładowane tylko relevantne reguły)
-- Łatwiejsze utrzymanie (edytujesz 1 plik, nie cały CLAUDE.md)
+- Łatwiejsze utrzymanie (edytujesz 1 plik, nie cały CLAUDE.qmd)
 - Mniej konfliktów w zespole
 
 ## Pattern 4: Security boundaries w promptach

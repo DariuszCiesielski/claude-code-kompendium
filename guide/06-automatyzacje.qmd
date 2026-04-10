@@ -149,4 +149,4 @@ jobs:
 
 ## Następny rozdział
 
-[← Rozdział 5: Praca z projektami](05-praca-z-projektami.md) | [Rozdział 7: Multi-agent →](07-multi-agent.md)
+[← Rozdział 5: Praca z projektami](05-praca-z-projektami.qmd) | [Rozdział 7: Multi-agent →](07-multi-agent.qmd)

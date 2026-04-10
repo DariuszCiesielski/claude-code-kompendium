@@ -193,4 +193,4 @@ Cały zespół korzysta z tych samych instrukcji. Zmiana konwencji = PR do CLAUD
 - **LinkedIn**: [Dariusz Ciesielski](https://www.linkedin.com/in/dariuszciesielski/)
 - **Dokumentacja Anthropic**: [docs.anthropic.com](https://docs.anthropic.com)
 
-[← Rozdział 9: Integracje](09-integracje.md) | [Ściągawka →](../cheatsheet/cheatsheet.md)
+[← Rozdział 9: Integracje](09-integracje.qmd) | [Ściągawka →](../cheatsheet/cheatsheet.qmd)

@@ -1,0 +1,31 @@
+project:
+  type: book
+  output-dir: _output
+
+book:
+  title: "Kompendium Claude Code"
+  subtitle: "Od podstaw po zaawansowane wzorce multi-agentowe"
+  author: "Dariusz Ciesielski"
+  date: "2026-04-10"
+  language: pl
+  reader-mode: true
+  chapters:
+    - index.md
+    - part: "Podstawy"
+      chapters:
+        - guide/01-wprowadzenie.md
+        - guide/03-system-skilli.md
+    - part: "Integracje i wzorce"
+      chapters:
+        - guide/09-integracje.md
+
+format:
+  typst:
+    extend: orange-book
+    toc-depth: 2
+    mainfont: "Source Serif 4"
+    monofont: "JetBrains Mono NL"
+    include-in-header:
+      - text: |
+          #set text(lang: "pl")
+          #show raw.where(block: true): set text(size: 0.85em)

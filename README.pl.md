@@ -10,7 +10,7 @@ Najobszerniejszy polskojęzyczny przewodnik po **Claude Code** — oficjalnym CL
 
 ## Pobierz PDF
 
-**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf)** — pełna wersja książkowa (69 stron) ze spisem treści, diagramami i wskazówkami praktycznymi.
+**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf?raw=true)** — pełna wersja książkowa (69 stron) ze spisem treści, diagramami i wskazówkami praktycznymi.
 
 ## 📚 Rozdziały
 

@@ -10,7 +10,7 @@ The most complete Polish-language guide to **Claude Code** — Anthropic's offic
 
 ## Download PDF
 
-**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf)** — full book version (69 pages) with table of contents, diagrams, and practical tips.
+**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf?raw=true)** — full book version (69 pages) with table of contents, diagrams, and practical tips.
 
 ## 📚 Guide Chapters
 

@@ -8,6 +8,10 @@
 
 The most complete Polish-language guide to **Claude Code** — Anthropic's official CLI for AI-assisted development. From first steps to advanced multi-agent workflows.
 
+## Download PDF
+
+**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf)** — full book version (69 pages) with table of contents, diagrams, and practical tips.
+
 ## 📚 Guide Chapters
 
 | # | Chapter | Description |

@@ -8,6 +8,10 @@
 
 Najobszerniejszy polskojęzyczny przewodnik po **Claude Code** — oficjalnym CLI Anthropic do programowania z AI. Od pierwszych kroków po zaawansowane wzorce multi-agentowe.
 
+## Pobierz PDF
+
+**[Kompendium-Claude-Code-v260410.pdf](Kompendium-Claude-Code-v260410.pdf)** — pełna wersja książkowa (69 stron) ze spisem treści, diagramami i wskazówkami praktycznymi.
+
 ## 📚 Rozdziały
 
 | # | Rozdział | Opis |

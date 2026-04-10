@@ -14,10 +14,25 @@ book:
     - part: "Podstawy"
       chapters:
         - guide/01-wprowadzenie.qmd
+        - guide/02-podstawowe-komendy.qmd
         - guide/03-system-skilli.qmd
+    - part: "Zaawansowane techniki"
+      chapters:
+        - guide/04-optymalizacja-tokenow.qmd
+        - guide/05-praca-z-projektami.qmd
+        - guide/06-automatyzacje.qmd
+        - guide/08-debugowanie.qmd
+    - part: "Multi-agent"
+      chapters:
+        - guide/07-multi-agent.qmd
+        - guide/11-multi-agent-frameworks.qmd
     - part: "Integracje i wzorce"
       chapters:
         - guide/09-integracje.qmd
+        - guide/10-najlepsze-praktyki.qmd
+        - guide/12-prompt-patterns.qmd
+  appendices:
+    - cheatsheet/cheatsheet.qmd
 
 format:
   typst:

@@ -36,7 +36,7 @@ book:
 
 format:
   typst:
-    extend: orange-book
+    extend: claude-book
     toc-depth: 2
     font-size: 11pt
     supplement-chapter: "Rozdział"

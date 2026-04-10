@@ -75,6 +75,11 @@ Przed zakończeniem sesji: `> zapisz handoff`. Rano: Claude przeczyta handoff i 
 
 ## 3. Bezpieczeństwo
 
+::: {.callout-warning}
+## Pliki chronione — nie edytuj bez potwierdzenia
+Nigdy nie pozwól agentowi AI automatycznie modyfikować: `.env`, plików migracji bazy danych, lock files, plików z kluczami API. Zawsze przeglądaj zmiany przed zatwierdzeniem.
+:::
+
 ### Chronione pliki
 
 Nigdy nie pozwalaj AI automatycznie edytować:
@@ -98,6 +103,11 @@ Nigdy nie pozwalaj AI automatycznie edytować:
 ---
 
 ## 4. Optymalizacja kosztów
+
+::: {.callout-tip}
+## Złota trójca oszczędności
+RTK (filtrowanie tokenów CLI) + CLAUDE.md (zero powtórek) + skille (zero długich promptów) = 60-90% oszczędności na tokenach. Skonfiguruj te trzy rzeczy na starcie każdego projektu.
+:::
 
 ### RTK (Rust Token Killer)
 
@@ -128,6 +138,11 @@ Checklist:
 - [ ] Typy są precyzyjne (nie `any`)
 - [ ] Brak console.log/debuggerów
 - [ ] Nazewnictwo spójne z projektem
+
+::: {.callout-important}
+## Testuj automatycznie w przeglądarce
+Po każdej zmianie UI uruchom Playwright do weryfikacji: renderowanie, formularze, nawigacja, błędy konsoli. Nie czekaj na ręczne testowanie — automatyzuj od pierwszego dnia.
+:::
 
 ### Testowanie w przeglądarce
 

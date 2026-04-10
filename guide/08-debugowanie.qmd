@@ -4,6 +4,11 @@
 
 Zamiast zgadywać, podejdź do debugowania metodycznie. Claude Code jest w tym dobry — ale potrzebuje Twojej pomocy w opisaniu problemu.
 
+::: {.callout-tip}
+## Zasada nr 1: Systematyczność
+Zamiast zgadywać, podejdź do debugowania metodycznie. Opisz symptomy, zawęź obszar problemu, zaproponuj hipotezę, zweryfikuj. Claude Code jest najskuteczniejszy gdy dostaje konkretne informacje o błędzie.
+:::
+
 ## Wzorzec zgłaszania błędu
 
 ### Słabo:
@@ -33,6 +38,24 @@ Zamiast zgadywać, podejdź do debugowania metodycznie. Claude Code jest w tym d
 ```
 
 ## Strategie debugowania
+
+::: {.callout-note}
+## Raport błędu — szablon
+Podaj Claude: (1) Co powinno się dziać, (2) Co się dzieje zamiast tego, (3) Kroki do reprodukcji, (4) Komunikat błędu, (5) Środowisko (OS, wersje), (6) Co już próbowałeś. Im więcej kontekstu, tym szybsze rozwiązanie.
+:::
+
+```{mermaid}
+flowchart TD
+    A["Błąd!"] --> B["Zbierz fakty\n(logi, error msg)"]
+    B --> C["Zawęź obszar\n(binary search)"]
+    C --> D["Sformułuj\nhipotezę"]
+    D --> E["Zweryfikuj\n(minimal repro)"]
+    E --> F{"Hipoteza\npotwierdzona?"}
+    F -->|Tak| G["Napraw"]
+    F -->|Nie| D
+    style A fill:#ff6b6b,color:#fff
+    style G fill:#51cf66,color:#fff
+```
 
 ### 1. Binary search — zawęż problem
 

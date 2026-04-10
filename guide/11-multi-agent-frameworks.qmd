@@ -1,5 +1,10 @@
 # Rozdział 11: Frameworki multi-agent — porównanie
 
+::: {.callout-note}
+## Kiedy potrzebujesz frameworka?
+Wbudowane subagenci Claude Code wystarczają dla większości zadań. Frameworki multi-agent rozważ gdy potrzebujesz: DAG (directed acyclic graph) do zarządzania zależnościami między zadaniami, współdzielonej pamięci między agentami, lub human-in-the-loop na poziomie orkiestratora.
+:::
+
 ## Problem: Gdy subagenci nie wystarczą
 
 Wbudowane subagenci Claude Code świetnie działają na proste, niezależne zadania (Rozdział 7). Ale co gdy potrzebujesz:
@@ -73,6 +78,11 @@ claude-session-driver start --sessions 3 \
 Prostsze niż framework, ale bez DAG i multi-model. Dobre do fire-and-forget.
 
 ## Wzorzec: Decision Log
+
+::: {.callout-important}
+## Problem: utrata kontekstu
+Claude Code kompaktuje kontekst gdy sesja się wydłuża. Jeśli pracujesz nad złożonym zadaniem, zapisuj kluczowe decyzje w Decision Log — plik `.ai/decisions.md` przetrwa kompaktowanie.
+:::
 
 Problem: Claude Code kompaktuje kontekst i **zapomina** decyzje z początku sesji.
 

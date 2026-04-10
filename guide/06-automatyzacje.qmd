@@ -46,6 +46,23 @@ W pliku `~/.claude/settings.json`:
 }
 ```
 
+::: {.callout-warning}
+## Uważaj na pętle hooków
+Hook, który sam wywołuje narzędzie, może uruchomić kolejny hook. Testuj hooki na małych operacjach przed dodaniem ich do produkcyjnego workflow.
+:::
+
+```{mermaid}
+flowchart LR
+    A["Zdarzenie\n(np. tool call)"] --> B{"Hook\nskonfigurowany?"}
+    B -->|Tak| C["Wykonaj\nkomendę shell"]
+    B -->|Nie| D["Kontynuuj\nnormalnie"]
+    C --> E{"Exit code\n= 0?"}
+    E -->|Tak| D
+    E -->|Nie| F["Zablokuj\nakcję"]
+    style F fill:#ff6b6b,color:#fff
+    style D fill:#51cf66,color:#fff
+```
+
 ## Praktyczne przykłady hooków
 
 ### Hook: Automatyczne sprawdzanie handoffów
@@ -139,6 +156,11 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
+
+::: {.callout-tip}
+## RTK jako automatyczny hook
+RTK rejestruje się jako hook przy instalacji i działa transparentnie. Każde polecenie CLI (git, npm, ls) automatycznie przechodzi przez filtr tokenów — zero konfiguracji z Twojej strony.
+:::
 
 ## Wskazówki
 

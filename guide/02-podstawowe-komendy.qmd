@@ -103,6 +103,11 @@ Claude Code może uruchamiać polecenia w terminalu:
 
 ## Efektywne polecenia — wzorce
 
+::: {.callout-important}
+## Kluczowa zasada
+Opisuj problem, nie rozwiązanie. Claude Code sam dobierze najlepsze narzędzia i podejście. Im więcej kontekstu biznesowego podasz, tym lepszy wynik dostaniesz.
+:::
+
 ### Wzorzec: Opisz problem, nie rozwiązanie
 
 ```
@@ -136,6 +141,11 @@ Claude Code może uruchamiać polecenia w terminalu:
 > Dodaj filtrowanie po kolumnie "status"
 [Claude dodaje]
 ```
+
+::: {.callout-tip}
+## Wzorzec złotej ścieżki
+Zacznij od prostego polecenia, oceń wynik, doprecyzuj. Iteracja jest tańsza niż próba opisania idealnego wyniku za jednym razem.
+:::
 
 ## Następny rozdział
 

@@ -8,6 +8,11 @@ Multi-agent to wzorzec, w którym Claude Code deleguje zadania do osobnych agent
 
 Subagent to osobna instancja Claude uruchomiona z konkretnym zadaniem. Główny agent (orkiestrator) deleguje i zbiera wyniki.
 
+::: {.callout-note}
+## Kiedy używać subagentów?
+Subagenci sprawdzają się gdy masz zadania niezależne od siebie (research + implementacja), potrzebujesz świeżego kontekstu (subagent nie dziedziczy pełnego kontekstu rodzica), lub chcesz równolegle wykonać wiele operacji.
+:::
+
 ### Kiedy używać subagentów?
 
 - **Zadania niezależne** — np. testowanie 3 komponentów jednocześnie
@@ -109,7 +114,25 @@ Supervisor monitoruje → [Worker 1, Worker 2]
 
 Użyj gdy: zadania są długie i mogą wymagać korekt w trakcie.
 
+```{mermaid}
+flowchart TD
+    A["Agent główny\n(orkiestrator)"] --> B["Subagent 1\nResearch"]
+    A --> C["Subagent 2\nImplementacja"]
+    A --> D["Subagent 3\nCode Review"]
+    B --> E["Wyniki"]
+    C --> E
+    D --> E
+    E --> F["Agent główny\nsyntetyzuje"]
+    style A fill:#4c6ef5,color:#fff
+    style F fill:#4c6ef5,color:#fff
+```
+
 ## Wskazówki
+
+::: {.callout-warning}
+## Nie nadużywaj multi-agent
+Subagenci mają overhead — każdy startuje z czystym kontekstem. Dla prostych zadań (1-3 pliki) lepiej pracować samodzielnie. Multi-agent opłaca się przy 4+ niezależnych plikach.
+:::
 
 1. **Nie nadużywaj multi-agent** — dla prostych zadań jeden agent jest szybszy
 2. **Definiuj jasne granice** — każdy agent musi wiedzieć co jest jego zakresem

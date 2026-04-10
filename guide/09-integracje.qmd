@@ -4,6 +4,11 @@
 
 MCP to otwarty standard pozwalający Claude Code łączyć się z zewnętrznymi narzędziami i źródłami danych. Zamiast kopiować dane ręcznie, Claude ma do nich bezpośredni dostęp.
 
+::: {.callout-note}
+## MCP — jeden protokół, wiele narzędzi
+Model Context Protocol to otwarty standard Anthropic. Dzięki niemu Claude Code łączy się z bazami danych, przeglądarkami, wyszukiwarkami i innymi narzędziami przez jednolity interfejs. Nie musisz pisać własnych integracji.
+:::
+
 ## Popularne serwery MCP
 
 | Serwer | Co robi | Przykład użycia |
@@ -127,7 +132,24 @@ server.tool('my-action', 'Opis co robi', {
 })
 ```
 
+```{mermaid}
+flowchart LR
+    A["Claude Code"] --> B["MCP Protocol"]
+    B --> C["Playwright\n(przeglądarka)"]
+    B --> D["Supabase\n(baza danych)"]
+    B --> E["Jina\n(web search)"]
+    B --> F["Context7\n(dokumentacja)"]
+    B --> G["GitHub\n(repo)"]
+    B --> H["Stripe\n(płatności)"]
+    style A fill:#4c6ef5,color:#fff
+```
+
 ## Wskazówki
+
+::: {.callout-tip}
+## Nie instaluj wszystkiego
+Zacznij od 2-3 serwerów MCP, które naprawdę potrzebujesz. Każdy dodatkowy serwer to czas uruchamiania i zużycie pamięci. Playwright + Supabase + Context7 to dobry start dla większości projektów.
+:::
 
 1. **Nie instaluj wszystkiego** — dodawaj MCP serwery, których naprawdę potrzebujesz
 2. **Klucze API w zmiennych środowiskowych** — nigdy w konfiguracji

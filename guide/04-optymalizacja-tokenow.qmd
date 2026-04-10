@@ -4,6 +4,18 @@
 
 Każda operacja w Claude Code zużywa tokeny. Im więcej tokenów, tym wyższy koszt i wolniejsze odpowiedzi. Dobrze zoptymalizowany workflow może **zaoszczędzić 60-90%** kosztów.
 
+```{mermaid}
+flowchart LR
+    A["Polecenie\nużytkownika"] --> B["Kontekst sesji\n+ pliki projektu"]
+    B --> C["Claude przetwarza\n(zużywa tokeny)"]
+    C --> D{"Wynik OK?"}
+    D -->|Tak| E["Gotowe"]
+    D -->|Nie| F["Kolejna iteracja\n(więcej tokenów)"]
+    F --> B
+    style E fill:#51cf66,color:#fff
+    style F fill:#ff6b6b,color:#fff
+```
+
 ## Czym są tokeny?
 
 Token to jednostka tekstu — średnio ~4 znaki w języku angielskim, ~3 znaki w polskim (polskie słowa są dłuższe). Przykład:
@@ -22,6 +34,11 @@ Token to jednostka tekstu — średnio ~4 znaki w języku angielskim, ~3 znaki w
 ### Jak działa?
 
 RTK przechwytuje polecenia CLI (git, npm, ls) i filtruje niepotrzebny output zanim trafi do Claude:
+
+::: {.callout-tip}
+## RTK oszczędza automatycznie
+Po instalacji RTK rejestruje się jako hook Claude Code i działa transparentnie. Nie musisz pamiętać o jego użyciu — każde polecenie CLI przechodzi przez filtr tokenów.
+:::
 
 ```bash
 # Bez RTK: git status zwraca pełny, rozwlekły output (~500 tokenów)
@@ -118,6 +135,11 @@ rtk gain --history    # Szczegółowa historia
 ```
 
 ## Typowe pułapki zużycia tokenów
+
+::: {.callout-warning}
+## Najczęstsze pożeracze tokenów
+Poniższa tabela pokazuje typowe sytuacje, w których tokeny są marnowane. Zwróć szczególną uwagę na „czytanie dużych plików w pętli" — to najczęstszy i najdroższy błąd.
+:::
 
 | Pułapka | Koszt | Rozwiązanie |
 |---------|-------|-------------|

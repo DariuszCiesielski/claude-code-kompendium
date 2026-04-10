@@ -1,5 +1,10 @@
 # Claude Code — Ściągawka
 
+::: {.callout-tip}
+## Jak używać ściągawki
+Wydrukuj tę stronę lub trzymaj ją otwartą obok terminala. Najczęściej używane komendy są na górze każdej sekcji.
+:::
+
 ## Uruchamianie
 
 ```bash

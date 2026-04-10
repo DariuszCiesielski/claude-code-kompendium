@@ -27,6 +27,11 @@ Podziel prompt na dwie części:
 └─────────────────────────────────────┘
 ```
 
+::: {.callout-tip}
+## Prefix caching — oszczędność 90%
+Wszystko co jest stałe (CLAUDE.md, instrukcje projektu, definicje typów) powinno być na początku kontekstu. Anthropic cache'uje prefiks — kolejne zapytania z tym samym początkiem kosztują 10% ceny.
+:::
+
 ### Oszczędność
 - Prefix ~10k tokenów × 100 wywołań/dzień = 1M tokenów
 - Z cache: ~10k × 1 (pierwsze) + 100 × suffix = **90% taniej**
@@ -86,6 +91,11 @@ Claude Code obsługuje to natywnie przez [path-scoped rules](https://docs.anthro
 - Łatwiejsze utrzymanie (edytujesz 1 plik, nie cały CLAUDE.qmd)
 - Mniej konfliktów w zespole
 
+::: {.callout-warning}
+## Reguły bezpieczeństwa: hardcode, nie prompt
+Krytyczne ograniczenia (jakie pliki chronić, jakich danych nie wyświetlać, kiedy pytać o potwierdzenie) muszą być zahardkodowane w CLAUDE.md. Nie polegaj na promptach — LLM może je „zapomnieć" przy kompaktowaniu kontekstu.
+:::
+
 ## Pattern 4: Security boundaries w promptach
 
 Z badań [agentshield](https://github.com/affaan-m/agentshield):
@@ -104,6 +114,18 @@ Z badań [agentshield](https://github.com/affaan-m/agentshield):
 ```
 
 **Dlaczego to działa:** LLM traktuje instrukcje „NIGDY" poważniej niż „unikaj". Konkretne wzorce (sk_, SERVICE_ROLE) są łatwiejsze do wykrycia niż abstrakcyjne reguły.
+
+## Hierarchia promptów
+
+```{mermaid}
+flowchart TD
+    A["System prompt\n(najwyższy priorytet)"] --> B["CLAUDE.md\n(instrukcje projektu)"]
+    B --> C["Skille\n(aktywowane kontekstowo)"]
+    C --> D["Memory\n(persystentny kontekst)"]
+    D --> E["Zapytanie użytkownika"]
+    style A fill:#4c6ef5,color:#fff
+    style E fill:#51cf66,color:#fff
+```
 
 ## Linki
 

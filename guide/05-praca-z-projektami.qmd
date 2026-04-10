@@ -4,6 +4,11 @@
 
 Plik `CLAUDE.md` to najważniejszy plik w konfiguracji Claude Code. To Twoja instrukcja dla AI — mówi Claude jak pracować z Twoim projektem.
 
+::: {.callout-important}
+## CLAUDE.md to Twoja „instrukcja obsługi" projektu
+Claude czyta ten plik na starcie każdej sesji. Wszystko czego Claude ma się trzymać — konwencje, stack, ograniczenia — zapisz tutaj. Nie polegaj na pamięci sesji.
+:::
+
 ### Globalny CLAUDE.md
 
 Plik `~/.claude/CLAUDE.md` zawiera instrukcje obowiązujące we **wszystkich** projektach:
@@ -67,6 +72,11 @@ Claude automatycznie zapamiętuje:
 
 ### MEMORY.md
 
+::: {.callout-tip}
+## Zasada: MEMORY.md > powtarzanie
+Zamiast tłumaczyć te same decyzje w każdej sesji, zapisuj je w plikach memory. Claude przeczyta je automatycznie i nie będziesz musiał się powtarzać.
+:::
+
 Plik `MEMORY.md` w katalogu pamięci projektu przechowuje:
 
 ```markdown
@@ -87,6 +97,16 @@ Aktywny — faza MVP
 - System fakturowania
 - Integracja z kalendarzem
 - Landing page
+```
+
+```{mermaid}
+flowchart TD
+    A["System pamięci\nClaude Code"] --> B["CLAUDE.md\n(instrukcje projektu)"]
+    A --> C["Memory files\n(persystentne)"]
+    A --> D["Handoffs\n(transfer kontekstu)"]
+    B --> E["Czytane na starcie\nkażdej sesji"]
+    C --> F["Zapamiętane\nmiędzy sesjami"]
+    D --> G["Kontynuacja pracy\npo przerwie"]
 ```
 
 ## Handoffy — przekazywanie kontekstu
